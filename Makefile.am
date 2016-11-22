@@ -3,7 +3,7 @@ MKDIR=mkdir
 CP=cp
 ZIP=zip
 
-HAL = ./hal
+HAL = ./hal/src
 HEADERS_DIR = ./include
 HAL_DIR = ./src/hal
 HAL_TARGET = hal.zip
@@ -46,11 +46,25 @@ MAINTAINERCLEANFILES = Makefile.in \
 	aclocal.m4 configure config.h.in config.sub config.guess \
 	ltmain.sh depcomp compile missing install-sh
 
-# TODO: add comm implementation
+# TODO: Add library.properties and keywords.txt file
 arduino-lib:
 	$(MKDIR) -p $(HAL)
 
 	$(CP) $(HEADERS_DIR)/*.h $(HAL)
+
+	$(CP) $(HAL_DIR)/comm/comm_nrf24l01.c $(HAL)
+
+	$(CP) ./src/nrf24l01/nrf24l01.* $(HAL)
+	$(CP) ./src/nrf24l01/nrf24l01_io.h $(HAL)
+	$(CP) ./src/nrf24l01/nrf24l01_io_arduino.c $(HAL)
+
+	$(CP) $(HAL_DIR)/comm/nrf24l01_ll.h $(HAL)
+
+	$(CP) ./src/drivers/*.c $(HAL)
+	$(CP) ./src/drivers/*.h $(HAL)
+
+	$(CP) ./src/spi/spi.h $(HAL)
+	$(CP) ./src/spi/spi_arduino.c $(HAL)
 
 	$(CP) $(HAL_DIR)/log/*cpp $(HAL)
 	$(CP) $(HAL_DIR)/storage/*cpp $(HAL)

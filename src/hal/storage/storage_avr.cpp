@@ -108,7 +108,8 @@ ssize_t hal_storage_write_end(uint8_t id, void *value, size_t len)
 	}
 
 	/*Store all the block in the calculated position*/
-	eeprom_write_block(value, (void *) dst, len);
+	if (len != 0)
+		eeprom_write_block(value, (void *) dst, len);
 
 	return len;
 }
@@ -178,5 +179,5 @@ void hal_storage_reset_end(void)
 	hal_storage_write_end(HAL_STORAGE_ID_UUID, data.uuid, UUID_SIZE);
 	hal_storage_write_end(HAL_STORAGE_ID_TOKEN, data.token, TOKEN_SIZE);
 	hal_storage_write_end(HAL_STORAGE_ID_MAC, data.mac, MAC_SIZE);
-	hal_storage_write_end(HAL_STORAGE_ID_CONFIG, &data, sizeof(data));
+	hal_storage_write_end(HAL_STORAGE_ID_CONFIG, NULL, 0);
 }

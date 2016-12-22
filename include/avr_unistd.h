@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-typedef long int ssize_t;
+typedef long ssize_t;
 
 #ifdef __cplusplus
 }

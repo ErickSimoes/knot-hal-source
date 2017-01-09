@@ -14,9 +14,8 @@
 extern "C" {
 #endif
 
-#ifndef _SSIZE_T_DECLARED
-typedef long ssize_t;
-#define _SSIZE_T_DECLARED
+#ifdef ARDUINO
+#include "include/avr_unistd.h"
 #endif
 
 // Identifier of data type to be stored
